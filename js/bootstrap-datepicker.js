@@ -300,7 +300,10 @@
 							if ($.inArray(e.keyCode, [27,37,39,38,40,32,13,9]) === -1)
 								this.update();
 						}, this),
-						keydown: $.proxy(this.keydown, this)
+						keydown: $.proxy(this.keydown, this),
+						change: $.proxy(function(e){
+							this.update();
+						}, this)
 					}]
 				];
 			}
@@ -604,6 +607,7 @@
 		update: function(){
 			if (!this._allow_update)
 				return;
+			this._allow_update = false;
 
 			var oldDates = this.dates.copy(),
 				dates = [],
@@ -659,6 +663,8 @@
 				this._trigger('clearDate');
 
 			this.fill();
+
+			this._allow_update = true;
 		},
 
 		fillDow: function(){
