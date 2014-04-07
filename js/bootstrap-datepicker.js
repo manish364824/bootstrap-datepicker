@@ -301,7 +301,7 @@
 								this.update();
 						}, this),
 						keydown: $.proxy(this.keydown, this),
-						change: $.proxy(function(e){
+						change: $.proxy(function(){
 							this.update();
 						}, this)
 					}]
