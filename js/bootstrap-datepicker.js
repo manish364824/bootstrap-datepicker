@@ -502,11 +502,11 @@
 			var formatted = this.getFormattedDate();
 			if (!this.isInput){
 				if (this.component){
-					this.element.find('input').val(formatted).change();
+					this._doChange(this.element.find('input').val(formatted));
 				}
 			}
 			else {
-				this.element.val(formatted).change();
+				this._doChange(this.element.val(formatted));
 			}
 		},
 
@@ -601,6 +601,13 @@
 				left: left,
 				zIndex: zIndex
 			});
+		},
+
+		_doChange: function(element) {
+			var old_allow_update = this._allow_update;
+			this._allow_update = false;
+			element.change();
+			this._allow_update = old_allow_update;
 		},
 
 		_allow_update: true,
@@ -947,7 +954,7 @@
 								else if (this.component)
 									element = this.element.find('input');
 								if (element)
-									element.val("").change();
+									this._doChange(element.val(""));
 								this.update();
 								this._trigger('changeDate');
 								if (this.o.autoclose)
@@ -1055,7 +1062,7 @@
 				element = this.element.find('input');
 			}
 			if (element){
-				element.change();
+				this._doChange(element);
 			}
 			if (this.o.autoclose && (!which || which === 'date')){
 				this.hide();
@@ -1234,7 +1241,7 @@
 					element = this.element.find('input');
 				}
 				if (element){
-					element.change();
+					this._doChange(element);
 				}
 			}
 		},
