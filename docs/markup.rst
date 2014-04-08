@@ -58,3 +58,30 @@ Instantiating the datepicker on a simple div will give an embedded picker that i
 
 .. figure:: _static/screenshots/markup_inline.png
     :align: center
+    
+    
+inline or embedded date-range
+-----------------------------
+
+Instantiating the datepicker is almost the same as a date range, but you'll need to set the ``inputs`` manually
+
+.. code-block:: html
+
+    <div class="range">
+        <div class="range-start"></div>
+        <div class="range-end"></div>
+    </div>
+    
+.. code-block:: javascript
+
+    // Instantiate
+    $('.range').datepicker({
+        inputs: $('.range-start, .range-end')
+    });
+    
+    // Manipulate dates
+    $('.range-start').datepicker('update', new Date(2013,1,1));
+    $('.range-end').datepicker('update', new Date(2013,5,1));
+
+    // Update the range (you have to fire this manually)
+    $('.range').datepicker('updateDates');
