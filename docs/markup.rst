@@ -11,7 +11,10 @@ The simplest case: focusing the input (clicking or tabbing into it) will show th
 
 .. code-block:: html
 
-    <input value="02-16-2012">
+    <input type="text" value="02-16-2012">
+
+.. figure:: _static/screenshots/markup_input.png
+    :align: center
 
 component
 ---------
@@ -21,10 +24,12 @@ Adding the ``date`` class to an ``input-append`` or ``input-prepend`` bootstrap 
 .. code-block:: html
 
     <div class="input-append date">
-        <input value="12-02-2012">
+        <input type="text" value="12-02-2012">
         <span class="add-on"><i class="icon-th"></i></span>
     </div>
 
+.. figure:: _static/screenshots/markup_component.png
+    :align: center
 
 date-range
 ----------
@@ -34,11 +39,13 @@ Using the ``input-daterange`` construct with multiple child inputs will instanti
 .. code-block:: html
 
     <div class="input-daterange">
-        <input value="2012-04-05" />
+        <input type="text" class="input-small" value="2012-04-05" />
         <span class="add-on">to</span>
-        <input value="2012-04-07" />
+        <input type="text" class="input-small" value="2012-04-19" />
     </div>
 
+.. figure:: _static/screenshots/markup_daterange.png
+    :align: center
 
 inline or embedded
 ------------------
@@ -47,4 +54,34 @@ Instantiating the datepicker on a simple div will give an embedded picker that i
 
 .. code-block:: html
 
-    <div></div>
+    <div data-date="12/03/2012"></div>
+
+.. figure:: _static/screenshots/markup_inline.png
+    :align: center
+    
+    
+inline or embedded date-range
+-----------------------------
+
+Instantiating the datepicker is almost the same as a date range, but you'll need to set the ``inputs`` manually
+
+.. code-block:: html
+
+    <div class="range">
+        <div class="range-start"></div>
+        <div class="range-end"></div>
+    </div>
+    
+.. code-block:: javascript
+
+    // Instantiate
+    $('.range').datepicker({
+        inputs: $('.range-start, .range-end')
+    });
+    
+    // Manipulate dates
+    $('.range-start').datepicker('update', new Date(2013,1,1));
+    $('.range-end').datepicker('update', new Date(2013,5,1));
+
+    // Update the range (you have to fire this manually)
+    $('.range').datepicker('updateDates');
